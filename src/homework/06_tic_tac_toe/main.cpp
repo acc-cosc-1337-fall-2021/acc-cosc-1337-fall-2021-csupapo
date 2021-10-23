@@ -36,5 +36,6 @@ int main()
 	} while (tictactoe.game_over() != 0);
 
 	cout<<"\nGame over.";
+	tictactoe.start_game(first_player);
 	
 }
