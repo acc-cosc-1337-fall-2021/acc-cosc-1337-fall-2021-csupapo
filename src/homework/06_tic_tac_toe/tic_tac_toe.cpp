@@ -2,12 +2,34 @@
 #include "tic_tac_toe.h"
 #include <iostream>
 
+
 using std::cout; using std::cin; using std::string;
 
 //Access to private function check_board_full;
 bool TicTacToe::game_over()
 {
-    return check_board_full();
+    if (check_column_win() == true)
+    {
+        set_winner();
+        return true;
+    }
+    else if(check_row_win() == true)
+    {
+        set_winner();
+        return true;
+    }
+    else if(check_diagonal_win() == true)
+    {
+        set_winner();
+        return true;
+    }
+
+    else if (check_board_full() == true)
+    {
+        winner = "C";
+        return true;
+    }
+    
 }
 
 //Assign free variable(first_player) to private variable(player) and call clear_board function 
@@ -55,13 +77,15 @@ void TicTacToe::set_next_player()
 //Iterate over vector until no space is found 
 bool TicTacToe::check_board_full()
 {
+    bool value = true;
     for (auto i : pegs)
     {
         if (i == " ")
         {
-            return 1;
-        }
+            value = false;
+        }    
     }
+    return value;
 }
 
 //Set all elements to spaces
@@ -70,14 +94,99 @@ void TicTacToe::clear_board()
     pegs.assign(9, " ");
 }
 
-bool input_validation(char exit_prompt)
+string TicTacToe::get_winner()
+{
+    return winner;
+}
+
+void TicTacToe::set_winner()
+{
+    if (player == "X")
+    {
+        winner = "O";
+    }
+
+    if (player == "O")
+    {
+        winner = "X";
+    }
+}
+
+bool TicTacToe::check_column_win()
+{
+    if (pegs[0] == "X" && pegs [3] == "X" && pegs[6] == "X" ||
+        pegs[1] == "X" && pegs [4] == "X" && pegs[7] == "X" || 
+        pegs[2] == "X" && pegs [5] == "X" && pegs[8] == "X")
+    {
+        return true;
+    }
+    else if (pegs[0] == "O" && pegs [3] == "O" && pegs[6] == "O" ||
+             pegs[1] == "O" && pegs [4] == "O" && pegs[7] == "O" || 
+             pegs[2] == "O" && pegs [5] == "O" && pegs[8] == "O")
+    {
+        return true;
+    }
+}
+
+bool TicTacToe::check_row_win()
+{
+    if (pegs[0] == "X" && pegs [1] == "X" && pegs[2] == "X" ||
+        pegs[3] == "X" && pegs [4] == "X" && pegs[5] == "X" || 
+        pegs[6] == "X" && pegs [7] == "X" && pegs[8] == "X")
+    {
+        return true;
+    }
+    else if (pegs[0] == "O" && pegs [1] == "O" && pegs[2] == "O" ||
+             pegs[3] == "O" && pegs [4] == "O" && pegs[5] == "O" || 
+             pegs[6] == "O" && pegs [7] == "O" && pegs[8] == "O")
+    {
+        return true;
+    }
+}
+
+bool TicTacToe::check_diagonal_win()
+{
+    if (pegs[0] == "X" && pegs [4] == "X" && pegs[8] == "X" ||
+        pegs[2] == "X" && pegs [4] == "X" && pegs[6] == "X")
+    {
+        return true;
+    }
+    else if (pegs[0] == "O" && pegs [4] == "O" && pegs[8] == "O" ||
+             pegs[2] == "O" && pegs [4] == "O" && pegs[6] == "O")
+    {
+        return true;
+    }
+}
+
+
+// Free Functions 
+
+//Validation for player input (X's and O's)
+string player_validation(string &prompt)
+{
+    
+    while(prompt != "X" && prompt != "O")
+    {
+        cout<<"\nDon't forget to use uppercase X or O.\n";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        cout<<"Please select X or O: ";
+        cin>>prompt;
+    }
+    // return prompt;
+}
+
+//Validation for exiting program 
+bool exit_validation(char exit_prompt)
 {
     bool exit_option;
     {   
         while (exit_prompt != 'y' && exit_prompt != 'Y' &&
                exit_prompt != 'n' && exit_prompt != 'N' )
         {
-            cout<<"Invalid input. Please enter (y/n) to restart or exit the game.";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            cout<<"Invalid input. Please enter (y/n) to restart or exit the game. : ";
             cin>>exit_prompt;
         }
 

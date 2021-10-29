@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+
 using std::cout; using std::cin; using std::string; 
 
 int main() 
@@ -13,15 +14,18 @@ int main()
 	char exit_prompt;
 	bool exit_option = false;
 
+
 	//Program flow
 	do
 	{
 		cout<<"Please select X or O: ";
     	cin>>first_player;
+		player_validation(first_player);
 		tictactoe.start_game(first_player);
+		cout<<"\n";
 		tictactoe.display_board();
 	
-		while (tictactoe.game_over() != 0)
+		do
 		{
 			if (tictactoe.get_player() == "X")
 			{
@@ -35,15 +39,18 @@ int main()
 			cout<<"Enter a position from 1 to 9: ";
 			cin>>position;
 			tictactoe.mark_board(position);
+			cout<<"\n";
 			tictactoe.display_board();
 			tictactoe.game_over();
-		} 
+		} while (tictactoe.game_over() != true);
 
 		cout<<"\nGame over.\n";
+		string winner = tictactoe.get_winner();
+		cout<<"The winner is " << winner << "!\n";
 		tictactoe.start_game(first_player);
 		cout<<"\nDo you want to play again? (y/n): ";
 		cin>>exit_prompt;
-		exit_option = input_validation(exit_prompt);
+		exit_option = exit_validation(exit_prompt);
 
 	}while (exit_option != false);
 	
