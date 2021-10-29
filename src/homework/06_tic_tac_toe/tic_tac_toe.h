@@ -20,3 +20,6 @@ private:
     void clear_board();
 
 };
+
+//Free Functions
+bool input_validation(char exit_prompt);

@@ -67,5 +67,29 @@ bool TicTacToe::check_board_full()
 //Set all elements to spaces
 void TicTacToe::clear_board()
 {
-    pegs[0,8] = " ";
+    pegs.assign(9, " ");
+}
+
+bool input_validation(char exit_prompt)
+{
+    bool exit_option;
+    {   
+        while (exit_prompt != 'y' && exit_prompt != 'Y' &&
+               exit_prompt != 'n' && exit_prompt != 'N' )
+        {
+            cout<<"Invalid input. Please enter (y/n) to restart or exit the game.";
+            cin>>exit_prompt;
+        }
+
+        if (exit_prompt == 'n' || exit_prompt == 'N')
+        {
+            exit_option = false;
+            return exit_option;
+        }
+        else if (exit_prompt == 'y' || exit_prompt == 'Y')
+        {
+            exit_option = true;
+            return exit_option;
+        }
+    }
 }
