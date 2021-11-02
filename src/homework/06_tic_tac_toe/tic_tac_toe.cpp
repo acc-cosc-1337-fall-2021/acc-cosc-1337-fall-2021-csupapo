@@ -94,11 +94,13 @@ void TicTacToe::clear_board()
     pegs.assign(9, " ");
 }
 
+//Access to private variable(winner) for main and other free functions
 string TicTacToe::get_winner()
 {
     return winner;
 }
 
+//Swap Player from X to O to determine correct winner 
 void TicTacToe::set_winner()
 {
     if (player == "X")
@@ -112,6 +114,7 @@ void TicTacToe::set_winner()
     }
 }
 
+// Determines if game is won by columns
 bool TicTacToe::check_column_win()
 {
     if (pegs[0] == "X" && pegs [3] == "X" && pegs[6] == "X" ||
@@ -128,6 +131,7 @@ bool TicTacToe::check_column_win()
     }
 }
 
+//Determines if game is won by rows
 bool TicTacToe::check_row_win()
 {
     if (pegs[0] == "X" && pegs [1] == "X" && pegs[2] == "X" ||
@@ -144,6 +148,7 @@ bool TicTacToe::check_row_win()
     }
 }
 
+//Determines if game is won diagonally 
 bool TicTacToe::check_diagonal_win()
 {
     if (pegs[0] == "X" && pegs [4] == "X" && pegs[8] == "X" ||
@@ -159,9 +164,9 @@ bool TicTacToe::check_diagonal_win()
 }
 
 
-// Free Functions 
+/* ----------------------------  Free Functions ---------------------------- */
 
-//Validation for player input (X's and O's)
+//Validation for player input (X's and O's) - uses reference parameter 
 string player_validation(string &prompt)
 {
     
