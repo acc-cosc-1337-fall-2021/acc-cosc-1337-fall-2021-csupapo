@@ -1,7 +1,15 @@
 #include <string>
 #include <vector>
+#include <iostream>
 
-using std::string; using std::vector;
+
+#ifndef TICTACTOE_H
+#define TICTACTOE_H
+
+
+using std::string; using std::vector; using std::ostream; using std::istream;
+
+
 
 class TicTacToe
 {
@@ -10,8 +18,10 @@ public:
     void start_game(string first_player);
     void mark_board(int position);
     string get_player() const; 
-    void display_board() const;
+    // void display_board() const;
     string get_winner();
+    friend ostream& operator<<(ostream& out, const TicTacToe& game);
+    friend istream& operator>>(istream& in, TicTacToe& game);
 
 private: 
     string player;
@@ -26,6 +36,8 @@ private:
     void set_winner();
 
 };
+
+#endif
 
 //Free Functions
 bool exit_validation(char exit_prompt);

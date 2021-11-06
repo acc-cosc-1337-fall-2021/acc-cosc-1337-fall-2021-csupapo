@@ -53,13 +53,13 @@ string TicTacToe::get_player() const
     return player;
 }
 
-//Display list in 3x3 format
+/*Display list in 3x3 format
 void TicTacToe::display_board() const
 {
-        cout<< pegs[0] << " | " << pegs[1] << " | " << pegs[2] << "\n";
-        cout<< pegs[3] << " | " << pegs[4] << " | " << pegs[5] << "\n";
-        cout<< pegs[6] << " | " << pegs[7] << " | " << pegs[8] << "\n";
-}
+        // cout<< pegs[0] << " | " << pegs[1] << " | " << pegs[2] << "\n";
+        // cout<< pegs[3] << " | " << pegs[4] << " | " << pegs[5] << "\n";
+        // cout<< pegs[6] << " | " << pegs[7] << " | " << pegs[8] << "\n";
+}*/
 
 //Swap Player from X to O and vice versa
 void TicTacToe::set_next_player()
@@ -91,7 +91,10 @@ bool TicTacToe::check_board_full()
 //Set all elements to spaces
 void TicTacToe::clear_board()
 {
-    pegs.assign(9, " ");
+    for (auto& peg: pegs)
+    {
+        peg = " ";
+    }
 }
 
 //Access to private variable(winner) for main and other free functions
@@ -163,6 +166,44 @@ bool TicTacToe::check_diagonal_win()
     }
 }
 
+//Display list in 3x3 format
+ostream& operator<<(ostream& out, const TicTacToe& game)
+{
+        out<< game.pegs[0] << " | " << game.pegs[1] << " | " << game.pegs[2] << "\n";
+        out<< game.pegs[3] << " | " << game.pegs[4] << " | " << game.pegs[5] << "\n";
+        out<< game.pegs[6] << " | " << game.pegs[7] << " | " << game.pegs[8] << "\n";
+        
+        // return out;
+        
+}
+istream& operator>>(istream& in, TicTacToe& game)
+{
+    int position = 0;
+
+    while(game.game_over() != true)
+    {
+        
+        if (game.get_player() == "X")
+        {
+            cout<<"\nPlayer 'X's Turn \n";
+        }
+
+        if (game.get_player() == "O")
+        {
+            cout<<"\n\nPlayer 'O's Turn \n";
+        }
+        cout<<"Enter a position from 1 to 9: ";
+        in>>position;
+        cout<<"1\n";
+        game.mark_board(position);
+        cout<<"2\n";
+        cout<<game;
+        cout<<"3\n";
+        cout<<"4\n";
+    }
+
+        return in;
+}
 
 /* ----------------------------  Free Functions ---------------------------- */
 

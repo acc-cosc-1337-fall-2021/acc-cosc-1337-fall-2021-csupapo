@@ -1,4 +1,5 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
 #include <iostream>
 #include <string>
 
@@ -23,35 +24,33 @@ int main()
 		player_validation(first_player);
 		tictactoe.start_game(first_player);
 		cout<<"\n";
-		tictactoe.display_board();
-	
+		cout<<tictactoe;
+
 		do
 		{
-			if (tictactoe.get_player() == "X")
-			{
-				cout<<"\nPlayer 'X's Turn \n";
-			}
-
-			if (tictactoe.get_player() == "O")
-			{
-				cout<<"\n\nPlayer 'O's Turn \n";
-			}
-			cout<<"Enter a position from 1 to 9: ";
-			cin>>position;
-			tictactoe.mark_board(position);
+			cin>>tictactoe;	
 			cout<<"\n";
-			tictactoe.display_board();
-			tictactoe.game_over();
-		} while (tictactoe.game_over() != true);
+			/*The program doesn't execute with mark_board here but also the rest of the program
+			  doesn't execute after the loop inside istream.*/
+			tictactoe.mark_board(position); 
+			cout<<"\n";
+    		tictactoe.start_game(first_player);
+			cout<<"\nDo you want to play again? (y/n): ";
+			cin>>exit_prompt;
+			exit_option = exit_validation(exit_prompt);
+			// tictactoe.game_over();
+		} 
+		while (tictactoe.game_over() != true);
 
-		cout<<"\nGame over.\n";
-		string winner = tictactoe.get_winner();
-		cout<<"The winner is " << winner << "!\n";
-		tictactoe.start_game(first_player);
-		cout<<"\nDo you want to play again? (y/n): ";
-		cin>>exit_prompt;
-		exit_option = exit_validation(exit_prompt);
-
+			cout<<"\nGame over.\n";
+			string winner = tictactoe.get_winner();
+			cout<<"The winner is " << winner << "!\n";
+			tictactoe.start_game(first_player);
+			cout<<"\nDo you want to play again? (y/n): ";
+			cin>>exit_prompt;
+			exit_option = exit_validation(exit_prompt);
+		
+		
 	}while (exit_option != false);
 	
 }
