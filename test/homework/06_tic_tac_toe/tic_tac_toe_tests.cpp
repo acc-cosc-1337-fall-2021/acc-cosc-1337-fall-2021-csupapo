@@ -1,6 +1,11 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
+#include<iostream>
+#include<string>
+using std::string;
+using std::cout;
 
 TEST_CASE("Verify Test Configuration", "verification") 
 {
@@ -67,6 +72,7 @@ TEST_CASE("Test win by first column", "1st column winner : X")
 	tictactoe.mark_board(7); // X's turn
 	tictactoe.mark_board(5);
 	REQUIRE(tictactoe.game_over() == (true)); 
+	REQUIRE(tictactoe.get_winner() == "X"); 
 }
 
 TEST_CASE("Test win by second column", "2nd column winner : X") 
@@ -79,7 +85,8 @@ TEST_CASE("Test win by second column", "2nd column winner : X")
 	tictactoe.mark_board(1);
 	tictactoe.mark_board(8); // X's turn
 	tictactoe.mark_board(9);
-	REQUIRE(tictactoe.game_over() == (true)); 
+	REQUIRE(tictactoe.game_over() == (true));
+	REQUIRE(tictactoe.get_winner() == "X"); 
 }
 
 TEST_CASE("Test win by third column", "3rd column winner : X") 
@@ -106,6 +113,7 @@ TEST_CASE("Test win by first row", "1st row winner : X")
 	tictactoe.mark_board(3); // X's turn
 	tictactoe.mark_board(8);
 	REQUIRE(tictactoe.game_over() == (true)); 
+	REQUIRE(tictactoe.get_winner() == "X"); 
 }
 
 TEST_CASE("Test win by second row", "2nd row winner : X") 
@@ -118,7 +126,8 @@ TEST_CASE("Test win by second row", "2nd row winner : X")
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(6); // X's turn
 	tictactoe.mark_board(9);
-	REQUIRE(tictactoe.game_over() == (true)); 
+	REQUIRE(tictactoe.game_over() == (true));
+	REQUIRE(tictactoe.get_winner() == "X");  
 }
 
 TEST_CASE("Test win by third row", "3rd row winner : X") 
@@ -131,7 +140,8 @@ TEST_CASE("Test win by third row", "3rd row winner : X")
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(9); // X's turn
 	tictactoe.mark_board(4);
-	REQUIRE(tictactoe.game_over() == (true)); 
+	REQUIRE(tictactoe.game_over() == (true));
+	REQUIRE(tictactoe.get_winner() == "X");  
 } 
 
 TEST_CASE("Test win diagonally from top left", "Top left diagonal winner : X") 
@@ -144,7 +154,8 @@ TEST_CASE("Test win diagonally from top left", "Top left diagonal winner : X")
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(9); // X's turn
 	tictactoe.mark_board(7);
-	REQUIRE(tictactoe.game_over() == (true)); 
+	REQUIRE(tictactoe.game_over() == (true));
+	REQUIRE(tictactoe.get_winner() == "X");  
 }
 
 TEST_CASE("Test win diagonally from bottom left", "Bottom left diagonal winner : X") 
@@ -157,5 +168,14 @@ TEST_CASE("Test win diagonally from bottom left", "Bottom left diagonal winner :
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(3); // X's turn
 	tictactoe.mark_board(4);
-	REQUIRE(tictactoe.game_over() == (true)); 
+	REQUIRE(tictactoe.game_over() == (true));
+	REQUIRE(tictactoe.get_winner() == "X");  
 }
+
+/* TEST_CASE("Test get_winner", "") 
+{
+	TicTacToe tictactoe;
+	TicTacToe tictactoe_manager;
+
+	REQUIRE(tictactoe.game_over() == (true)); 
+} */

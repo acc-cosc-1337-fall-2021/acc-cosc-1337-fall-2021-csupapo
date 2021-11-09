@@ -10,10 +10,14 @@ int main()
 {
 	//Declare instances and variables (if any)
 	TicTacToe tictactoe;
+	TicTacToeManager tictactoe_manager;
 	string first_player;
 	int position;
 	char exit_prompt;
 	bool exit_option = false;
+	int x_win;
+	int o_win;
+	int ties;
 
 
 	//Program flow
@@ -24,33 +28,37 @@ int main()
 		player_validation(first_player);
 		tictactoe.start_game(first_player);
 		cout<<"\n";
-		cout<<tictactoe;
-
-		do
+		
+		while (tictactoe.game_over() != true)
 		{
 			cin>>tictactoe;	
 			cout<<"\n";
-			/*The program doesn't execute with mark_board here but also the rest of the program
-			  doesn't execute after the loop inside istream.*/
-			tictactoe.mark_board(position); 
+			cout << tictactoe;
 			cout<<"\n";
-    		tictactoe.start_game(first_player);
-			cout<<"\nDo you want to play again? (y/n): ";
-			cin>>exit_prompt;
-			exit_option = exit_validation(exit_prompt);
-			// tictactoe.game_over();
 		} 
-		while (tictactoe.game_over() != true);
-
+			tictactoe_manager.save_game(tictactoe);
+			tictactoe_manager.get_winner_total(x_win, o_win, ties); // gets total winner , x_win in main gets value from x_win inside function - and etc.
 			cout<<"\nGame over.\n";
 			string winner = tictactoe.get_winner();
+			if (winner == "C")
+			{
+				cout<<"It's a tie"<< "!\n";
+			}
+			else
+			{
 			cout<<"The winner is " << winner << "!\n";
+			}
 			tictactoe.start_game(first_player);
 			cout<<"\nDo you want to play again? (y/n): ";
 			cin>>exit_prompt;
 			exit_option = exit_validation(exit_prompt);
-		
-		
+
 	}while (exit_option != false);
+	
+	cout<<tictactoe_manager;
+	cout<<"\n";
+	cout<<"O wins: "<<x_win<<"\n";
+    cout<<"X wins: "<<o_win<<"\n";
+    cout<<"Ties: "<<ties<<"\n";
 	
 }

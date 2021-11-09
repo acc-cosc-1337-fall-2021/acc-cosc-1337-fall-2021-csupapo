@@ -20,8 +20,8 @@ public:
     string get_player() const; 
     // void display_board() const;
     string get_winner();
-    friend ostream& operator<<(ostream& out, const TicTacToe& game);
-    friend istream& operator>>(istream& in, TicTacToe& game);
+    friend ostream& operator<<(ostream& out, const TicTacToe& games);
+    friend istream& operator>>(istream& in, TicTacToe& games);
 
 private: 
     string player;

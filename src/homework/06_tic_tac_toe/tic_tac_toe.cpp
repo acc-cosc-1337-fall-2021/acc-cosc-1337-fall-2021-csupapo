@@ -53,14 +53,6 @@ string TicTacToe::get_player() const
     return player;
 }
 
-/*Display list in 3x3 format
-void TicTacToe::display_board() const
-{
-        // cout<< pegs[0] << " | " << pegs[1] << " | " << pegs[2] << "\n";
-        // cout<< pegs[3] << " | " << pegs[4] << " | " << pegs[5] << "\n";
-        // cout<< pegs[6] << " | " << pegs[7] << " | " << pegs[8] << "\n";
-}*/
-
 //Swap Player from X to O and vice versa
 void TicTacToe::set_next_player()
 {
@@ -167,40 +159,36 @@ bool TicTacToe::check_diagonal_win()
 }
 
 //Display list in 3x3 format
-ostream& operator<<(ostream& out, const TicTacToe& game)
+ostream& operator<<(ostream& out, const TicTacToe& tictactoe)
 {
-        out<< game.pegs[0] << " | " << game.pegs[1] << " | " << game.pegs[2] << "\n";
-        out<< game.pegs[3] << " | " << game.pegs[4] << " | " << game.pegs[5] << "\n";
-        out<< game.pegs[6] << " | " << game.pegs[7] << " | " << game.pegs[8] << "\n";
+        out<< tictactoe.pegs[0] << " | " << tictactoe.pegs[1] << " | " << tictactoe.pegs[2] << "\n";
+        out<< tictactoe.pegs[3] << " | " << tictactoe.pegs[4] << " | " << tictactoe.pegs[5] << "\n";
+        out<< tictactoe.pegs[6] << " | " << tictactoe.pegs[7] << " | " << tictactoe.pegs[8] << "\n";
         
-        // return out;
+         return out;
         
 }
-istream& operator>>(istream& in, TicTacToe& game)
+
+//Overload cin operator to input positions into tictactoe instance
+istream& operator>>(istream& in, TicTacToe& tictactoe)
 {
     int position = 0;
 
-    while(game.game_over() != true)
-    {
-        
-        if (game.get_player() == "X")
+
+        if (tictactoe.get_player() == "X")
         {
             cout<<"\nPlayer 'X's Turn \n";
         }
 
-        if (game.get_player() == "O")
+        if (tictactoe.get_player() == "O")
         {
             cout<<"\n\nPlayer 'O's Turn \n";
         }
+
         cout<<"Enter a position from 1 to 9: ";
         in>>position;
-        cout<<"1\n";
-        game.mark_board(position);
-        cout<<"2\n";
-        cout<<game;
-        cout<<"3\n";
-        cout<<"4\n";
-    }
+        cout<<"\n";
+        tictactoe.mark_board(position);
 
         return in;
 }
@@ -219,7 +207,7 @@ string player_validation(string &prompt)
         cout<<"Please select X or O: ";
         cin>>prompt;
     }
-    // return prompt;
+    return prompt;
 }
 
 //Validation for exiting program 
@@ -246,5 +234,6 @@ bool exit_validation(char exit_prompt)
             exit_option = true;
             return exit_option;
         }
+        return exit_option;
     }
 }
