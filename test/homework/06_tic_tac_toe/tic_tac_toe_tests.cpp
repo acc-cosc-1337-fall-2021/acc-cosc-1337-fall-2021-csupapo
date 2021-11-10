@@ -3,9 +3,8 @@
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_manager.h"
 #include<iostream>
-#include<string>
-using std::string;
-using std::cout;
+// #include<string>    <--- already included in tic_tac_toe.h
+
 
 TEST_CASE("Verify Test Configuration", "verification") 
 {
@@ -70,7 +69,6 @@ TEST_CASE("Test win by first column", "1st column winner : X")
 	tictactoe.mark_board(4); // X's turn
 	tictactoe.mark_board(3);
 	tictactoe.mark_board(7); // X's turn
-	tictactoe.mark_board(5);
 	REQUIRE(tictactoe.game_over() == (true)); 
 	REQUIRE(tictactoe.get_winner() == "X"); 
 }
@@ -84,7 +82,6 @@ TEST_CASE("Test win by second column", "2nd column winner : X")
 	tictactoe.mark_board(5); // X's turn
 	tictactoe.mark_board(1);
 	tictactoe.mark_board(8); // X's turn
-	tictactoe.mark_board(9);
 	REQUIRE(tictactoe.game_over() == (true));
 	REQUIRE(tictactoe.get_winner() == "X"); 
 }
@@ -98,7 +95,6 @@ TEST_CASE("Test win by third column", "3rd column winner : X")
 	tictactoe.mark_board(6); // X's turn
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(9); // X's turn
-	tictactoe.mark_board(4);
 	REQUIRE(tictactoe.game_over() == (true)); 
 }
 
@@ -111,7 +107,6 @@ TEST_CASE("Test win by first row", "1st row winner : X")
 	tictactoe.mark_board(2); // X's turn
 	tictactoe.mark_board(7);
 	tictactoe.mark_board(3); // X's turn
-	tictactoe.mark_board(8);
 	REQUIRE(tictactoe.game_over() == (true)); 
 	REQUIRE(tictactoe.get_winner() == "X"); 
 }
@@ -125,7 +120,6 @@ TEST_CASE("Test win by second row", "2nd row winner : X")
 	tictactoe.mark_board(5); // X's turn
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(6); // X's turn
-	tictactoe.mark_board(9);
 	REQUIRE(tictactoe.game_over() == (true));
 	REQUIRE(tictactoe.get_winner() == "X");  
 }
@@ -139,7 +133,6 @@ TEST_CASE("Test win by third row", "3rd row winner : X")
 	tictactoe.mark_board(8); // X's turn
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(9); // X's turn
-	tictactoe.mark_board(4);
 	REQUIRE(tictactoe.game_over() == (true));
 	REQUIRE(tictactoe.get_winner() == "X");  
 } 
@@ -153,7 +146,6 @@ TEST_CASE("Test win diagonally from top left", "Top left diagonal winner : X")
 	tictactoe.mark_board(5); // X's turn
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(9); // X's turn
-	tictactoe.mark_board(7);
 	REQUIRE(tictactoe.game_over() == (true));
 	REQUIRE(tictactoe.get_winner() == "X");  
 }
@@ -167,15 +159,92 @@ TEST_CASE("Test win diagonally from bottom left", "Bottom left diagonal winner :
 	tictactoe.mark_board(5); // X's turn
 	tictactoe.mark_board(2);
 	tictactoe.mark_board(3); // X's turn
-	tictactoe.mark_board(4);
 	REQUIRE(tictactoe.game_over() == (true));
 	REQUIRE(tictactoe.get_winner() == "X");  
 }
 
-/* TEST_CASE("Test get_winner", "") 
+TEST_CASE("Test get_winner_total function from TicTacToe_Manager", "") 
 {
+	/*---------- GAME 1 ----------*/ 
 	TicTacToe tictactoe;
-	TicTacToe tictactoe_manager;
+	TicTacToeManager tictactoe_manager;
+	int x_win;
+	int o_win;
+	int ties;
+	
+	tictactoe.start_game("X");
+	tictactoe.mark_board(1); // X's turn
+	tictactoe.mark_board(2);
+	tictactoe.mark_board(4); // X's turn
+	tictactoe.mark_board(3);
+	tictactoe.mark_board(7); // X's turn
+	REQUIRE(tictactoe.game_over() == (true));
 
-	REQUIRE(tictactoe.game_over() == (true)); 
-} */
+	tictactoe_manager.save_game(tictactoe); //saves game to vector
+	tictactoe_manager.get_winner_total(x_win, o_win, ties); //tallys winner totals
+	
+	//Verify get_winner_total() contains correct tally
+	REQUIRE(x_win == 1); // X win total: 1
+	REQUIRE(o_win == 0); // O win total: 0
+	REQUIRE(ties == 0); // Ties total: 0
+
+	/*---------- GAME 2 ----------*/ 
+
+	tictactoe.start_game("O");
+	tictactoe.mark_board(1); // O's turn
+	tictactoe.mark_board(3);
+	tictactoe.mark_board(5); // O's turn
+	tictactoe.mark_board(2);
+	tictactoe.mark_board(9); // O's turn
+	REQUIRE(tictactoe.game_over() == (true));
+
+	tictactoe_manager.save_game(tictactoe); //saves game to vector
+	tictactoe_manager.get_winner_total(x_win, o_win, ties); //tallys winner totals
+	
+	//Verify get_winner_total() contains correct tally
+	REQUIRE(x_win == 1); // X win total: 1
+	REQUIRE(o_win == 1); // O win total: 1 
+	REQUIRE(ties == 0); // Ties total: 0
+
+
+	/*---------- GAME 3 ----------*/ 
+	tictactoe.start_game("X");
+	tictactoe.mark_board(1); // X's turn
+	tictactoe.mark_board(2); 
+	tictactoe.mark_board(3); // X's turn
+	tictactoe.mark_board(5);
+	tictactoe.mark_board(4); // X's turn
+	tictactoe.mark_board(6);
+	tictactoe.mark_board(8); // X's turn
+	tictactoe.mark_board(7);
+	tictactoe.mark_board(9); // X's turn
+	REQUIRE(tictactoe.game_over() == (true));
+
+	tictactoe_manager.save_game(tictactoe); //saves game to vector
+	tictactoe_manager.get_winner_total(x_win, o_win, ties); //tallys winner totals
+	
+	//Verify get_winner_total() contains correct tally
+	REQUIRE(x_win == 1); // X win total: 1
+	REQUIRE(o_win == 1); // O win total: 1 
+	REQUIRE(ties == 1); // Ties total: 1
+
+
+	/*---------- GAME 4 ----------*/ 
+	
+	tictactoe.start_game("X");
+	tictactoe.mark_board(1); // X's turn
+	tictactoe.mark_board(2);
+	tictactoe.mark_board(4); // X's turn
+	tictactoe.mark_board(3);
+	tictactoe.mark_board(7); // X's turn
+	REQUIRE(tictactoe.game_over() == (true));
+
+	tictactoe_manager.save_game(tictactoe); //saves game to vector
+	tictactoe_manager.get_winner_total(x_win, o_win, ties); //tallys winner totals
+	
+	//Verify get_winner_total() contains correct tally
+	REQUIRE(x_win == 2); // X win total: 2
+	REQUIRE(o_win == 1); // O win total: 1 
+	REQUIRE(ties == 1); // Ties total: 1
+
+} 
