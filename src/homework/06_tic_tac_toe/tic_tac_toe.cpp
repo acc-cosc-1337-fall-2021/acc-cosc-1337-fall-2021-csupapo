@@ -112,7 +112,7 @@ void TicTacToe::set_winner()
 // Determines if game is won by columns
 bool TicTacToe::check_column_win()
 {
-    if (pegs[0] == "X" && pegs [3] == "X" && pegs[6] == "X" ||
+    /*if (pegs[0] == "X" && pegs [3] == "X" && pegs[6] == "X" ||
         pegs[1] == "X" && pegs [4] == "X" && pegs[7] == "X" || 
         pegs[2] == "X" && pegs [5] == "X" && pegs[8] == "X")
     {
@@ -123,13 +123,15 @@ bool TicTacToe::check_column_win()
              pegs[2] == "O" && pegs [5] == "O" && pegs[8] == "O")
     {
         return true;
-    }
+    }*/
+
+    return false;
 }
 
 //Determines if game is won by rows
 bool TicTacToe::check_row_win()
 {
-    if (pegs[0] == "X" && pegs [1] == "X" && pegs[2] == "X" ||
+    /*if (pegs[0] == "X" && pegs [1] == "X" && pegs[2] == "X" ||
         pegs[3] == "X" && pegs [4] == "X" && pegs[5] == "X" || 
         pegs[6] == "X" && pegs [7] == "X" && pegs[8] == "X")
     {
@@ -140,13 +142,15 @@ bool TicTacToe::check_row_win()
              pegs[6] == "O" && pegs [7] == "O" && pegs[8] == "O")
     {
         return true;
-    }
+    } */
+
+    return false;
 }
 
 //Determines if game is won diagonally 
 bool TicTacToe::check_diagonal_win()
 {
-    if (pegs[0] == "X" && pegs [4] == "X" && pegs[8] == "X" ||
+    /*if (pegs[0] == "X" && pegs [4] == "X" && pegs[8] == "X" ||
         pegs[2] == "X" && pegs [4] == "X" && pegs[6] == "X")
     {
         return true;
@@ -155,16 +159,27 @@ bool TicTacToe::check_diagonal_win()
              pegs[2] == "O" && pegs [4] == "O" && pegs[6] == "O")
     {
         return true;
-    }
+    } */
+
+    return false;
 }
 
 //Display list in 3x3 format
 ostream& operator<<(ostream& out, const TicTacToe& tictactoe)
 {
+    if (tictactoe.pegs.size() == 3)
+    {
         out<< tictactoe.pegs[0] << " | " << tictactoe.pegs[1] << " | " << tictactoe.pegs[2] << "\n";
         out<< tictactoe.pegs[3] << " | " << tictactoe.pegs[4] << " | " << tictactoe.pegs[5] << "\n";
         out<< tictactoe.pegs[6] << " | " << tictactoe.pegs[7] << " | " << tictactoe.pegs[8] << "\n";
-        
+    }
+    else if (tictactoe.pegs.size() == 4)
+    {
+        out<< tictactoe.pegs[0] << " | " << tictactoe.pegs[1] << " | " << tictactoe.pegs[2] << " | " << tictactoe.pegs[3] << "\n";
+        out<< tictactoe.pegs[4] << " | " << tictactoe.pegs[5] << " | " << tictactoe.pegs[6] << " | " << tictactoe.pegs[7] << "\n";
+        out<< tictactoe.pegs[8] << " | " << tictactoe.pegs[9] << " | " << tictactoe.pegs[10] << " | " << tictactoe.pegs[11] << "\n";
+        out<< tictactoe.pegs[12] << " | " << tictactoe.pegs[13] << " | " << tictactoe.pegs[14] << " | " << tictactoe.pegs[15] << "\n";
+    }
          return out;
         
 }
