@@ -1,6 +1,16 @@
 //cpp
 #include "tic_tac_toe_manager.h"
 
+TicTacToeManager::TicTacToeManager(TicTacToeData d) : data(d)
+{
+    games = data.get_games();
+
+    for(auto& game : games)
+    {
+        update_winner_count(game->get_winner());
+    }
+}
+
 
 void TicTacToeManager::save_game(unique_ptr<TicTacToe>& tictactoe)
 {
@@ -44,3 +54,8 @@ void TicTacToeManager::update_winner_count(string winner)
             ties += 1;
         }
     }
+
+TicTacToeManager::~TicTacToeManager()
+{
+    data.save_games(games);
+}

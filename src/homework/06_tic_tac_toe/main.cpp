@@ -1,6 +1,7 @@
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
+#include "tic_tac_toe_data.h"
 #include "tic_tac_toe_manager.h"
 // #include <memory>
 #include <iostream>
@@ -12,9 +13,9 @@ using std::cout; using std::cin; using std::string; using std::unique_ptr; using
 
 int main() 
 {
-	// TicTacToe tictactoe;
+	TicTacToeData data;
 	unique_ptr<TicTacToe> tictactoe; //save memory region for a game
-	TicTacToeManager tictactoe_manager;
+	TicTacToeManager tictactoe_manager(data);
 
 	//Declare instances and variables (if any)
 	string first_player = "X";
@@ -36,7 +37,7 @@ int main()
 			cout<<"\t3: 3 x 3 board\n";
 
 			cout<<"\t4: 4 x 4 board\n";
-			cout<<"Your Choice: \n";
+			cout<<"Your Choice: ";
 			cin>>game_choice;
 		}
 		if (game_choice == 3)
@@ -48,7 +49,7 @@ int main()
 			tictactoe = make_unique<TicTacToe_4>();
 		}
 		
-		cout<<"Please select X or O: ";
+		cout<<"\nPlease select X or O: ";
     	cin>>first_player;
 		player_validation(first_player);
 		tictactoe->start_game(first_player);

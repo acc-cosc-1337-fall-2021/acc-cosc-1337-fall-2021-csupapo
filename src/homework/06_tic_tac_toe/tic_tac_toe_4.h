@@ -11,6 +11,7 @@ class TicTacToe_4 : public TicTacToe
 
 public:
     TicTacToe_4() : TicTacToe(4){}
+    TicTacToe_4(vector<string> p, string win): TicTacToe(p, win){}
     
 private:
     bool check_column_win() override;
