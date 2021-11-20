@@ -1,9 +1,8 @@
 //h
 #include "tic_tac_toe.h"
-#include "tic_tac_toe_manager.h"
 
-#ifndef TICTACTOE_3
-#define TICTACTOE_3
+#ifndef TICTACTOE_3_H
+#define TICTACTOE_3_H
 
 
 class TicTacToe_3 : public TicTacToe

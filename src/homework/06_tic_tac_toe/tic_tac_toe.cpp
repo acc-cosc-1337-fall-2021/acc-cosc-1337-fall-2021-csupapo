@@ -3,6 +3,7 @@
 #include <iostream>
 
 
+
 using std::cout; using std::cin; using std::string;
 
 //Access to private function check_board_full;
@@ -29,6 +30,7 @@ bool TicTacToe::game_over()
         winner = "C";
         return true;
     }
+    return false;
     
 }
 
@@ -90,7 +92,7 @@ void TicTacToe::clear_board()
 }
 
 //Access to private variable(winner) for main and other free functions
-string TicTacToe::get_winner()
+string TicTacToe::get_winner() const
 {
     return winner;
 }
@@ -167,7 +169,7 @@ bool TicTacToe::check_diagonal_win()
 //Display list in 3x3 format
 ostream& operator<<(ostream& out, const TicTacToe& tictactoe)
 {
-    if (tictactoe.pegs.size() == 3)
+    /*if (tictactoe.pegs.size() == 3)
     {
         out<< tictactoe.pegs[0] << " | " << tictactoe.pegs[1] << " | " << tictactoe.pegs[2] << "\n";
         out<< tictactoe.pegs[3] << " | " << tictactoe.pegs[4] << " | " << tictactoe.pegs[5] << "\n";
@@ -180,8 +182,20 @@ ostream& operator<<(ostream& out, const TicTacToe& tictactoe)
         out<< tictactoe.pegs[8] << " | " << tictactoe.pegs[9] << " | " << tictactoe.pegs[10] << " | " << tictactoe.pegs[11] << "\n";
         out<< tictactoe.pegs[12] << " | " << tictactoe.pegs[13] << " | " << tictactoe.pegs[14] << " | " << tictactoe.pegs[15] << "\n";
     }
-         return out;
+         return out; */
+
+    for(std::size_t i=0; i < tictactoe.pegs.size(); i += std::sqrt(tictactoe.pegs.size()))
+    {
+        out<<tictactoe.pegs[i] <<" | "<<tictactoe.pegs[i+1]<<" | "<<tictactoe.pegs[i+2];
         
+        if(tictactoe.pegs.size() == 16) {out<<" | "<<tictactoe.pegs[i+3];}
+        {
+            out<<"\n";
+        }
+
+    }
+    return out;
+
 }
 
 //Overload cin operator to input positions into tictactoe instance
@@ -200,11 +214,13 @@ istream& operator>>(istream& in, TicTacToe& tictactoe)
             cout<<"\n\nPlayer 'O's Turn \n";
         }
 
-        cout<<"Enter a position from 1 to 9: ";
+        while (position < 1 || position > tictactoe.pegs.size())
+        {
+        cout<<"Enter a position from 1 to " <<tictactoe.pegs.size()<< ": " ;
         in>>position;
         cout<<"\n";
-        tictactoe.mark_board(position);
-
+        }
+        tictactoe.mark_board(position); 
         return in;
 }
 

@@ -1,6 +1,8 @@
 #include <string>
 #include <vector>
+#include <math.h>
 #include <iostream>
+
 
 
 #ifndef TICTACTOE_H
@@ -21,12 +23,12 @@ public:
     void mark_board(int position);
     string get_player() const; 
     // void display_board() const;
-    string get_winner();
-    friend ostream& operator<<(ostream& out, const TicTacToe& games);
-    friend istream& operator>>(istream& in, TicTacToe& games);
+    string get_winner() const;
+    friend ostream& operator<<(ostream& out, const TicTacToe& tictactoe);
+    friend istream& operator>>(istream& in, TicTacToe& tictactoe);
 
 protected:
-    std::vector<std::string> pegs;
+    vector<string> pegs; 
     virtual bool check_column_win();
     virtual bool check_row_win();
     virtual bool check_diagonal_win();

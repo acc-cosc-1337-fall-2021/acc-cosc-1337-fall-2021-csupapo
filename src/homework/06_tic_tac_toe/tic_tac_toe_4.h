@@ -2,8 +2,8 @@
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_manager.h"
 
-#ifndef TICTACTOE_4
-#define TICTACTOE_4
+#ifndef TICTACTOE_4_H
+#define TICTACTOE_4_H
 
 
 class TicTacToe_4 : public TicTacToe
@@ -18,6 +18,5 @@ private:
     bool check_diagonal_win() override;
 
 };
-
 
 #endif

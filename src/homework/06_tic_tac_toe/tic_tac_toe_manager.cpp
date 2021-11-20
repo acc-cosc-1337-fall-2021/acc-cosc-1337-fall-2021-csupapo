@@ -2,7 +2,7 @@
 #include "tic_tac_toe_manager.h"
 
 
-void TicTacToeManager::save_game(unique_ptr<TicTacToe> &tictactoe)
+void TicTacToeManager::save_game(unique_ptr<TicTacToe>& tictactoe)
 {
     update_winner_count(tictactoe->get_winner());
     games.push_back(move(tictactoe));
@@ -12,12 +12,12 @@ void TicTacToeManager::get_winner_total(int& x, int& o, int& t)
 {
     x = x_win;
     o = o_win;
-    t = ties;
+    t = ties;                                                                                                                           
 }
 
 ostream& operator<<(ostream & out, const TicTacToeManager& manager)
 {
-    for (const auto& game : manager.games)
+    for (auto& game : manager.games)
     {
         out<<*game<<"\n"; // de-reference the vector of unique pointers in games
     }

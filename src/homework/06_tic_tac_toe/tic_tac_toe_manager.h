@@ -11,7 +11,7 @@ using std::unique_ptr; using std::make_unique; using std::move;
 class TicTacToeManager 
 {
 public:
-    void save_game(unique_ptr<TicTacToe> &tictactoe);
+    void save_game(unique_ptr<TicTacToe>& tictactoe);
     friend ostream& operator<<(ostream & out, const TicTacToeManager& manager);
     void get_winner_total(int& o, int& w, int& t);
 
